@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MR B Matrimony - Admin Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="admin-login-container">
+        <div class="admin-login-card">
+            <div class="logo">MR B Matrimony</div>
+            <h2>Admin Login</h2>
+            <form id="adminLoginForm">
+                <div class="form-group">
+                    <label>User ID:</label>
+                    <input type="text" id="adminUserId" required placeholder="Enter admin user ID">
+                </div>
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input type="password" id="adminPassword" required placeholder="Enter password">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login as Admin</button>
+            </form>
+            <div class="back-to-site">
+                <a href="index.html" class="btn btn-secondary">Back to Main Site</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel (Hidden initially) -->
+    <div id="adminPanel" class="admin-panel-container hidden">
+        <header>
+            <nav>
+                <div class="logo">MR B Matrimony - Admin Panel</div>
+                <div class="admin-controls">
+                    <span id="adminWelcome">Welcome, Admin</span>
+                    <a href="index.html" class="btn btn-secondary">Main Site</a>
+                    <a href="#" class="btn btn-primary" onclick="adminLogout()">Logout</a>
+                </div>
+            </nav>
+        </header>
+
+        <main class="admin-main">
+            <div class="container">
+                <div class="admin-tabs">
+                    <div class="admin-tab active" onclick="showAdminTab('users')">Users Management</div>
+                    <div class="admin-tab" onclick="showAdminTab('profiles')">Profiles</div>
+                    <div class="admin-tab" onclick="showAdminTab('interactions')">Interactions</div>
+                </div>
+
+                <div id="adminUsers" class="admin-content active">
+                    <h3>User Management</h3>
+                    <div class="stats-cards">
+                        <div class="stat-card">
+                            <h4>Total Users</h4>
+                            <p id="totalUsers">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Active Users</h4>
+                            <p id="activeUsers">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Inactive Users</h4>
+                            <p id="inactiveUsers">0</p>
+                        </div>
+                    </div>
+                    <div id="usersList" class="user-list">
+                        <!-- Users will be populated here -->
+                    </div>
+                </div>
+
+                <div id="adminProfiles" class="admin-content">
+                    <h3>Profile Management</h3>
+                    <div class="stats-cards">
+                        <div class="stat-card">
+                            <h4>Total Profiles</h4>
+                            <p id="totalProfiles">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Male Profiles</h4>
+                            <p id="maleProfiles">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Female Profiles</h4>
+                            <p id="femaleProfiles">0</p>
+                        </div>
+                    </div>
+                    <div id="adminProfilesList" class="profile-grid">
+                        <!-- Profiles will be populated here -->
+                    </div>
+                </div>
+
+                <div id="adminInteractions" class="admin-content">
+                    <h3>User Interactions</h3>
+                    <div class="stats-cards">
+                        <div class="stat-card">
+                            <h4>Total Likes</h4>
+                            <p id="totalLikes">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Total Messages</h4>
+                            <p id="totalMessages">0</p>
+                        </div>
+                    </div>
+                    <div id="interactionsList" class="interactions-list">
+                        <!-- Interactions will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Admin Reply Modal -->
+    <div id="replyModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAdminModal('replyModal')">&times;</span>
+            <h2 id="replyModalTitle">Reply to Interaction</h2>
+            <div id="replyInteractionDetails" class="interaction-details-box">
+                <!-- Interaction details will be populated here -->
+            </div>
+            <form id="replyForm" onsubmit="event.preventDefault(); sendAdminReply();">
+                <div class="form-group">
+                    <label>Admin Reply:</label>
+                    <textarea id="adminReplyText" rows="4" required placeholder="Type your reply to the customer..."></textarea>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <button type="submit" class="btn btn-primary">Send Reply</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeAdminModal('replyModal')">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

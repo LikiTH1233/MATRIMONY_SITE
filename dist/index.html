@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MR B Matrimony - Find Your Perfect Match</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">MR B Matrimony</div>
+            <ul class="nav-links">
+                <li><a href="#home" onclick="scrollToSection('home')">Home</a></li>
+                <li><a href="#about" onclick="scrollToSection('about')">About</a></li>
+                <li><a href="#profiles" onclick="scrollToSection('profiles')">View Profiles</a></li>
+                <li><a href="#contact" onclick="scrollToSection('contact')">Contact</a></li>
+            </ul>
+            <div class="auth-buttons" id="authButtons">
+                <a href="#" class="btn btn-secondary" onclick="showModal('loginModal')">Login</a>
+                <a href="#" class="btn btn-primary" onclick="showModal('registerModal')">Register</a>
+                
+            </div>
+ <div class="auth-buttons hidden" id="userButtons">
+    <span id="welcomeUser"></span>
+    <a href="#" class="btn btn-info" onclick="showCustomerNotifications()">
+        🔔 Notifications
+        <span id="notificationsBadge" class="notification-badge" style="display: none;">0</span>
+    </a>
+    <a href="#" class="btn btn-secondary" onclick="showModal('profileModal')">My Profile</a>
+    <a href="#" class="btn btn-primary" onclick="logout()">Logout</a>
+</div>
+            <div class="auth-buttons hidden" id="adminButtons">
+                <a href="admin.html" class="btn btn-primary">Admin Login</a>
+            </div>
+        </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="section">
+            <div class="hero">
+                <div class="container">
+                    <h1>Find Your Perfect Match</h1>
+                    <p>Join thousands of happy couples who found love through MR B Matrimony</p>
+                    <!-- Get Started button - hidden after login -->
+                    
+                    <!-- Welcome message for logged-in users -->
+                    <div id="welcomeMessage" class="welcome-message hidden">
+                        <p>Welcome back! Start exploring profiles to find your perfect match.</p>
+                        <a href="#profiles" class="btn btn-primary" onclick="scrollToSection('profiles')">Browse Profiles</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="card">
+                    <h2>Why Choose MR B Matrimony?</h2>
+                    <p>We are committed to helping you find your life partner with our advanced matching system and personalized approach.</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon">💝</div>
+                            <h3>Verified Profiles</h3>
+                            <p>All profiles are manually verified for authenticity and safety.</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">🔍</div>
+                            <h3>Advanced Matching</h3>
+                            <p>Our smart algorithms help you find compatible matches.</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">🔒</div>
+                            <h3>Privacy & Security</h3>
+                            <p>Your personal information is completely secure with us.</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">💬</div>
+                            <h3>Easy Communication</h3>
+                            <p>Connect with potential matches through our messaging system.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="container">
+                <div class="card">
+                    <h1>About MR B Matrimony</h1>
+                    <p>MR B Matrimony is a trusted platform that has been bringing hearts together for years. Our mission is to help individuals find their perfect life partner through our comprehensive matching services.</p>
+                    
+                    <div class="about-content">
+                        <div class="about-text">
+                            <h3>Our Story</h3>
+                            <p>Founded with the vision of creating meaningful connections, MR B Matrimony has successfully united thousands of couples. We understand that finding the right life partner is one of the most important decisions you'll ever make.</p>
+                            
+                            <h3>Our Mission</h3>
+                            <p>To provide a safe, secure, and user-friendly platform where individuals can find their perfect match based on compatibility, values, and shared interests.</p>
+                        </div>
+                        
+                        <div class="services-list">
+                            <h3>Our Services:</h3>
+                            <ul>
+                                <li>✓ Advanced profile matching system</li>
+                                <li>✓ Secure and private communication</li>
+                                <li>✓ Manually verified profiles</li>
+                                <li>✓ 24/7 customer support</li>
+                                <li>✓ Mobile-friendly platform</li>
+                                <li>✓ Privacy protection guarantee</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- View Profiles Section -->
+        <section id="profiles" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h1>View Profiles</h1>
+                    <p>Browse through our verified profiles and find your perfect match</p>
+                </div>
+                
+                <div class="like-counter hidden" id="likeCounter">
+                    Likes Remaining: <span id="likesLeft">5</span>
+                </div>
+                
+                <div class="card">
+                    <div class="filter-buttons">
+                        <button class="btn btn-primary" onclick="filterProfiles('all')">All Profiles</button>
+                        <button class="btn btn-secondary" onclick="filterProfiles('male')">Men</button>
+                        <button class="btn btn-secondary" onclick="filterProfiles('female')">Women</button>
+                    </div>
+                </div>
+
+                <div id="profilesContainer" class="profile-grid">
+                    <!-- Profiles will be populated here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="container">
+                <div class="card">
+                    <div class="contact-header">
+                        <h1>Contact Us</h1>
+                        <p>Have questions? We're here to help you find your perfect match!</p>
+                    </div>
+                    
+                    <div class="contact-content">
+                        <div class="contact-info">
+                            <h3>Get in Touch</h3>
+                            <div class="contact-item">
+                                <div class="contact-icon">📧</div>
+                                <div>
+                                    <strong>Email:</strong>
+                                    <p>support@mrbmatrimony.com</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">📞</div>
+                                <div>
+                                    <strong>Phone:</strong>
+                                    <p>+91 12345 67890</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">📍</div>
+                                <div>
+                                    <strong>Address:</strong>
+                                    <p>123 Love Street, Romance City, India</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-hours">
+                            <h3>Office Hours</h3>
+                            <p><strong>Monday - Friday:</strong> 9:00 AM - 6:00 PM</p>
+                            <p><strong>Saturday:</strong> 10:00 AM - 4:00 PM</p>
+                            <p><strong>Sunday:</strong> Closed</p>
+                            
+                            <div style="margin-top: 2rem;">
+                                <h3>Advanced Services</h3>
+                                <p>For personalized matchmaking and premium services:</p>
+                                <button class="btn btn-primary" onclick="showModal('matchmakerModal')" style="margin-top: 1rem;">
+                                    Contact Matchmaker
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modals -->
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Customer Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <h2>Customer Registration</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>Name:</label>
+                    <input type="text" id="registerName" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number:</label>
+                    <input type="tel" id="registerPhone" required>
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('profileModal')">&times;</span>
+            <h2 id="profileModalTitle">Create Profile</h2>
+            <form id="profileForm">
+                <div class="form-group">
+                    <label>Name:</label>
+                    <input type="text" id="profileName" required>
+                </div>
+                <div class="form-group">
+                    <label>Gender:</label>
+                    <select id="profileGender" required>
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Age:</label>
+                    <input type="number" id="profileAge" min="18" max="100" required>
+                </div>
+                <div class="form-group">
+                    <label>Photos (Max 5 images - JPG/PNG only):</label>
+                    <input type="file" id="profilePhotos" multiple accept=".jpg,.jpeg,.png" max="5">
+                    <div id="photoPreview" class="photo-preview-container">
+                        <!-- Photo previews will appear here -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Description:</label>
+                    <textarea id="profileDescription" rows="4" placeholder="Tell us about yourself..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Summary:</label>
+                    <textarea id="profileSummary" rows="3" placeholder="Brief summary..."></textarea>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <button type="submit" class="btn btn-primary">Save Profile</button>
+                    <button type="button" class="btn btn-secondary" id="deleteProfileBtn" onclick="deleteProfile()" style="display: none;">Delete Profile</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Message Modal -->
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('messageModal')">&times;</span>
+            <h2>Send Message</h2>
+            <form id="messageForm">
+                <div class="form-group">
+                    <label>Message:</label>
+                    <textarea id="messageText" rows="5" required placeholder="Write your message..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Matchmaker Contact Modal -->
+    <div id="matchmakerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('matchmakerModal')">&times;</span>
+            <h2>Contact Our Matchmaker</h2>
+            <p>Get personalized assistance from our expert matchmakers for premium services.</p>
+            <form id="matchmakerForm">
+                <div class="form-group">
+                    <label>Your Name:</label>
+                    <input type="text" id="matchmakerName" required>
+                </div>
+                <div class="form-group">
+                    <label>Your Email:</label>
+                    <input type="email" id="matchmakerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number:</label>
+                    <input type="tel" id="matchmakerPhone" required>
+                </div>
+                <div class="form-group">
+                    <label>Service Required:</label>
+                    <select id="matchmakerService" required>
+                        <option value="">Select Service</option>
+                        <option value="personalized-matching">Personalized Matching</option>
+                        <option value="profile-consultation">Profile Consultation</option>
+                        <option value="premium-search">Premium Partner Search</option>
+                        <option value="meeting-arrangement">Meeting Arrangement</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Message:</label>
+                    <textarea id="matchmakerMessage" rows="5" required placeholder="Describe your requirements and preferences..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Send Request</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Customer Notifications Modal -->
+  <!-- Notifications Modal -->
+<div id="notificationsModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('notificationsModal')">&times;</span>
+        <h2>🔔 Your Notifications</h2>
+        <div id="notificationsList" class="notifications-list">
+            <!-- Notifications will be populated here -->
+        </div>
+    </div>
+</div>
+<!-- Notifications Modal -->
+<div id="notificationsModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('notificationsModal')">&times;</span>
+        <h2>🔔 Your Notifications</h2>
+        <div id="notificationsList" class="notifications-list">
+            <!-- Notifications will be populated here -->
+        </div>
+    </div>
+</div>
+
+<!-- Notifications Modal -->
+<div id="notificationsModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('notificationsModal')">&times;</span>
+        <h2>🔔 Your Notifications</h2>
+        <div id="notificationsList" class="notifications-list">
+            <!-- Notifications will be populated here -->
+        </div>
+    </div>
+</div>
+
+
+
+    <script src="script.js"></script>
+</body>
+</html>
