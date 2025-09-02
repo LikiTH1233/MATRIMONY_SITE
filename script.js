@@ -884,3 +884,13 @@ window.addEventListener('click', function(event) {
         }
     });
 });
+function updateAuthButtons(){
+  if(currentUser){
+    document.getElementById('authButtons').style.display = 'none';
+    document.getElementById('userButtons').style.display = 'flex';
+  } else {
+    document.getElementById('authButtons').style.display = 'flex';
+    document.getElementById('userButtons').style.display = 'none';
+  }
+}
+
