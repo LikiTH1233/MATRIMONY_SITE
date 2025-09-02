@@ -4394,4 +4394,29 @@ main {
     font-size: 0.8rem;
     border-radius: 4px;
 }
+/* Ensure auth buttons container is visible */
+#authButtons {
+  display: flex !important;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  /* Show auth buttons as block on small screens */
+  #authButtons {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  #authButtons a {
+    width: 100%;
+    text-align: center;
+    margin: 5px 0;
+  }
+
+  #authButtons a.btn {
+    display: inline-block;
+  }
+}
 
